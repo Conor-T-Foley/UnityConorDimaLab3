@@ -6,9 +6,10 @@ public class EnemyController : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public int enemyCount = 5;
-    private int wave = 1; // 1 = block enemies, 2 = circular , 3 = boss
+    private int wave = 2; // 1 = block enemies, 2 = circular , 3 = boss
     private List<GameObject> activeEnemies = new List<GameObject>();
     public float enemyDropMagnitude = 0.5f;
+    public float circularEnemySpread = 1.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,32 @@ public class EnemyController : MonoBehaviour
                 Vector3 spawnPos = new Vector3(startX + (i * 2.0f), 1, startZ);
                 GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
                 activeEnemies.Add(enemy);
+            }
+        }
+        else if (wave == 2)
+        {
+            Vector3 focalPoint = new Vector3(0, 1, 0); // Center of rotation, on screen
+            float radius = 1.5f;
+            float angleStep = 360f / enemyCount;
+
+            for (int i = 0; i < enemyCount; i++)
+            {
+                float angle = i * angleStep * Mathf.Deg2Rad;
+                Vector3 spawnPos = new Vector3(
+                    focalPoint.x + Mathf.Cos(angle) * radius * circularEnemySpread,
+                    focalPoint.y,
+                    focalPoint.z + Mathf.Sin(angle) * radius * circularEnemySpread
+                );
+
+                GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                activeEnemies.Add(enemy);
+
+                // Add circular motion
+                CircularEnemyMovement circularMove = enemy.AddComponent<CircularEnemyMovement>();
+                circularMove.focalPoint = focalPoint;
+                circularMove.radius = radius; // New field!
+                circularMove.startAngle = angle; // New field!
+                circularMove.rotationSpeed = 30f;
             }
         }
     }
