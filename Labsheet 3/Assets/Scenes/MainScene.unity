@@ -302,8 +302,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2773706316327475591, guid: 41b70777b68d9fd488f9b13c85adba84, type: 3}
   enemyCount: 5
+  wave: 1
   enemyDropMagnitude: 0.5
   circularEnemySpread: 20
+  circularFocalPoint: {x: 0, y: 1, z: 4}
 --- !u!4 &978775215
 Transform:
   m_ObjectHideFlags: 0
