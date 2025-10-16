@@ -14,7 +14,17 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
     }
- 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("wall"))
+        {
+            Vector3 bounceDirection = collision.contacts[0].normal;
+
+            float bounceForce = 2f;
+            playerRB.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
