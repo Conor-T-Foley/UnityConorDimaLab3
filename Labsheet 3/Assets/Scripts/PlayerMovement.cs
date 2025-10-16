@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody playerRB;
     public float speed = 100;
+    [SerializeField]//allows it to apear in inspector
+    private GameObject projectilePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,13 @@ public class PlayerMovement : MonoBehaviour
             playerRB.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
         }
     }
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
