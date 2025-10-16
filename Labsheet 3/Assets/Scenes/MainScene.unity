@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 841262714}
   - component: {fileID: 841262713}
   - component: {fileID: 841262718}
+  - component: {fileID: 841262719}
+  - component: {fileID: 841262720}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -155,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9072174410d1d584da784a38abf9e38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2000
 --- !u!65 &841262714
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -271,6 +274,45 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!54 &841262719
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841262712}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
+--- !u!114 &841262720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841262712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e358b3065bcb3b340b22d51ce7e40904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &978775213
 GameObject:
   m_ObjectHideFlags: 0
