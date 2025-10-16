@@ -11,7 +11,14 @@ public class Bullets : MonoBehaviour
     {
         
     }
-
+    void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            Debug.Log("Collision detected between player and enemy");
+        }
+    }
     // Update is called once per frame
     void Update()
     {
