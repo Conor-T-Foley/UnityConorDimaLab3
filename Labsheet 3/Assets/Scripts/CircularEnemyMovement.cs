@@ -13,12 +13,12 @@ public class CircularEnemyMovement : MonoBehaviour
 
     void Start()
     {
-        // Initialize each enemy’s angle, NEEDS TO BE RANDOM!
         currentAngle = startAngle;
     }
 
     void Update()
     {
+        // Rotate around the focal point
         currentAngle += rotationSpeed * Time.deltaTime;
         float radians = currentAngle * Mathf.Deg2Rad;
 
@@ -29,6 +29,5 @@ public class CircularEnemyMovement : MonoBehaviour
         );
 
         transform.position = newPos;
-        transform.LookAt(focalPoint); // Optional
     }
 }
