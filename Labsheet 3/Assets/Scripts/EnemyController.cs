@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
                 GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
                 activeEnemies.Add(enemy);
 
-               
+
                 CircularEnemyMovement circularMove = enemy.AddComponent<CircularEnemyMovement>();
                 circularMove.focalPointRef = this;
                 circularMove.radius = radius;
@@ -61,6 +61,21 @@ public class EnemyController : MonoBehaviour
                 circularMove.rotationSpeed = 30f;
                 circularMove.speed = 1.0f;
                 circularMove.boundaryX = 10f;
+            }
+        }
+        else if (wave == 3)
+        {
+            float startZ = 4.0f;
+
+            for (int i = 0; i < enemyCount; i++)
+            {
+                Vector3 spawnPosition = new Vector3(Random.Range(-5.0f, 5.0f), 1, startZ + Random.Range(-2.0f, 2.0f));
+                GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                activeEnemies.Add(enemy);
+
+                BossEnemyMovement bossMovement = enemy.AddComponent<BossEnemyMovement>();
+                bossMovement.speed = Random.Range(2.0f, 4.0f);
+
             }
         }
     }
