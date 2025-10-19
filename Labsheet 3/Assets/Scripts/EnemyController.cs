@@ -15,6 +15,10 @@ public class EnemyController : MonoBehaviour
     // Make circular enemies share a focal point so the drop together!!
     public Vector3 circularFocalPoint = new Vector3(0, 1, 4);
 
+    public GameObject projectilePrefab;
+    public float fireRate = 1.5f;
+    public float bulletSPeed = 10.0f;
+
     void Start()
     {
         SpawnEnemies();
@@ -32,11 +36,13 @@ public class EnemyController : MonoBehaviour
                 Vector3 spawnPos = new Vector3(startX + (i * 2.0f), 1, startZ);
                 GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
                 activeEnemies.Add(enemy);
+
+                AddShooting(enemy, trackPlayer: false);
             }
         }
         else if (wave == 2)
         {
-            float radius = 0.5f;
+            float radius = 1.0f;
             float angleStep = 360f / enemyCount;
 
             for (int i = 0; i < enemyCount; i++)
@@ -61,6 +67,8 @@ public class EnemyController : MonoBehaviour
                 circularMove.rotationSpeed = 30f;
                 circularMove.speed = 1.0f;
                 circularMove.boundaryX = 10f;
+
+                AddShooting(enemy, trackPlayer: false);
             }
         }
         else if (wave == 3)
@@ -76,8 +84,19 @@ public class EnemyController : MonoBehaviour
                 BossEnemyMovement bossMovement = enemy.AddComponent<BossEnemyMovement>();
                 bossMovement.speed = Random.Range(2.0f, 4.0f);
 
+                AddShooting (enemy, trackPlayer: true);
             }
         }
+
+        void AddShooting(GameObject enemy, bool trackPlayer)
+        {
+            EnemyShooting shooting = enemy.AddComponent<EnemyShooting>();
+            shooting.projectilePrefab = projectilePrefab;
+            shooting.fireRate = fireRate;
+            shooting.bulletSpeed = bulletSPeed;
+            shooting.trackPlayer = trackPlayer;
+        }
+
     }
 
     public void MoveEnemiesDown()
@@ -95,3 +114,5 @@ public class EnemyController : MonoBehaviour
         }
     }
 }
+
+
