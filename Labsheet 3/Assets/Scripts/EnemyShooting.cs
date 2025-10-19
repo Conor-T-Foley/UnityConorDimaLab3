@@ -43,7 +43,7 @@ public class EnemyShooting : MonoBehaviour
         }
         else
         {
-            direction = Vector3.back; // Should make the wave 1&2 shoot straight down
+            direction = -transform.forward; // Should make the wave 1&2 shoot straight down
         }
 
         GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);

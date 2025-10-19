@@ -19,9 +19,35 @@ public class EnemyController : MonoBehaviour
     public float fireRate = 1.5f;
     public float bulletSPeed = 10.0f;
 
+    private bool ongoingWave = false;
+
     void Start()
     {
         SpawnEnemies();
+        ongoingWave = true;
+    }
+
+    private void Update()
+    {
+        // For each enemy in the list, if enemey is null, remove it
+        // Destroying enemy with player bullet just sets it to null so a count check wont work
+        // Have to have this check instead!!
+        activeEnemies.RemoveAll(e => e == null);
+
+        if (ongoingWave && activeEnemies.Count == 0)
+        {
+            ongoingWave = false;
+            wave++;
+            StartCoroutine(NextWave());
+        }
+
+    }
+
+    IEnumerator NextWave()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SpawnEnemies();
+        ongoingWave= true;
     }
 
     void SpawnEnemies()
@@ -35,6 +61,7 @@ public class EnemyController : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(startX + (i * 2.0f), 1, startZ);
                 GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                enemy.tag = "enemy";
                 activeEnemies.Add(enemy);
 
                 AddShooting(enemy, trackPlayer: false);
@@ -57,6 +84,7 @@ public class EnemyController : MonoBehaviour
                 );
 
                 GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                enemy.tag = "enemy";
                 activeEnemies.Add(enemy);
 
 
@@ -79,6 +107,7 @@ public class EnemyController : MonoBehaviour
             {
                 Vector3 spawnPosition = new Vector3(Random.Range(-5.0f, 5.0f), 1, startZ + Random.Range(-2.0f, 2.0f));
                 GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                enemy.tag = "enemy";
                 activeEnemies.Add(enemy);
 
                 BossEnemyMovement bossMovement = enemy.AddComponent<BossEnemyMovement>();

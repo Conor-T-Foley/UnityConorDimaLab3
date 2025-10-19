@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 841262719}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -700,10 +700,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2773706316327475591, guid: 41b70777b68d9fd488f9b13c85adba84, type: 3}
   enemyCount: 5
-  wave: 3
+  wave: 1
   enemyDropMagnitude: 0.5
-  circularEnemySpread: 20
+  circularEnemySpread: 50
   circularFocalPoint: {x: 0, y: 1, z: 4}
+  projectilePrefab: {fileID: 7237520405992599508, guid: 3e5718104e9b67f4c851cbd07462b91a, type: 3}
+  fireRate: 1.5
+  bulletSPeed: 10
 --- !u!4 &978775215
 Transform:
   m_ObjectHideFlags: 0
